@@ -4,7 +4,11 @@ import {
   Geist_Mono,
   Press_Start_2P,
   Space_Mono,
-  Share_Tech_Mono
+  Share_Tech_Mono,
+  Space_Grotesk,
+  Inter,
+  Orbitron,
+  Audiowide
 } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/footer";
@@ -39,6 +43,27 @@ const pressStart = Press_Start_2P({
   weight: ["400"],
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+});
+
+const audiowide = Audiowide({
+  weight: "400",
+  variable: "--font-audiowide",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "IEEE Techfest 2026",
   description: "Official TechFest Registration System",
@@ -60,6 +85,10 @@ export default function RootLayout({
         ${shareTech.variable} 
         ${spaceMono.variable} 
         ${pressStart.variable} 
+        ${spaceGrotesk.variable} 
+        ${inter.variable} 
+        ${orbitron.variable} 
+        ${audiowide.variable} 
         dark
       `}
     >
