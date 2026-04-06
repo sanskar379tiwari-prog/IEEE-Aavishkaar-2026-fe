@@ -124,7 +124,7 @@ export function RulesWin95Panel({
   useEffect(() => {
     if (phase !== 'boot') return
     if (bootIndex >= BOOT_LINES.length) {
-      setPhase('typing')
+      setTimeout(() => setPhase('typing'), 0)
       return
     }
     const t = setTimeout(() => setBootIndex((i) => i + 1), BOOT_LINE_SPEED)
@@ -135,7 +135,7 @@ export function RulesWin95Panel({
   useEffect(() => {
     if (phase !== 'typing') return
     if (charIndex >= fullCode.length) {
-      setPhase('done')
+      setTimeout(() => setPhase('done'), 0)
       return
     }
     const t = setTimeout(() => setCharIndex((i) => i + 1), CHAR_SPEED)

@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Calendar, Phone, MapPin } from "lucide-react";
 import Link from "next/link";
@@ -54,50 +55,57 @@ export const EventCard = ({
   description,
   contacts,
   variant = "orange",
-  index,
-}: EventCardProps) => {
-  const v = VARIANTS[variant];
+    index,
+  }: EventCardProps) => {
+    const v = VARIANTS[variant];
+  
+    // Generate stable matrix content based on slug to maintain purity
+    const matrixLines = React.useMemo(() => 
+      [...Array(20)].map((_, i) => 
+        (slug + i).split('').reverse().join('').toUpperCase().padEnd(50, 'X').substring(0, 48) + " " +
+        (title + i).split('').reverse().join('').toUpperCase().padEnd(50, 'Y').substring(0, 48)
+      ), [slug, title]);
+  
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: index * 0.2 }}
+        style={{ perspective: "1000px" }}
+        whileHover={{
+          y: -10,
+          rotateX: 4,
+          rotateY: 4,
+          transition: { duration: 0.4 }
+        }}
+        className={cn(
+          "relative flex flex-col w-full max-w-[380px] bg-[#0a0a0c] border rounded-sm overflow-hidden",
+          v.border,
+          "shadow-[0_0_30px_rgba(0,0,0,1)] group"
+        )}
+      >
+        {/* Moving Border Glow (The Rotating Outline) */}
+        <div className={cn(
+          "absolute -inset-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-sm overflow-hidden z-0",
+          "before:absolute before:inset-[-200%] before:bg-[conic-gradient(from_0deg,transparent_60%,var(--glow-color)_85%,transparent_100%)] before:animate-[spin_4s_linear_infinite]"
+        )} style={{ '--glow-color': v.glow } as React.CSSProperties} />
+  
+        {/* Internal Background Depth Layers */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none z-0" />
+  
+        {/* Top Section: Scrolling Matrix/Code Effect */}
+        <div className="relative h-48 overflow-hidden bg-black border-b border-white/10 z-10">
+          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent z-10" />
+  
+          <div className={cn("absolute inset-0 font-mono text-[8px] leading-tight select-none opacity-[0.15] transition-all duration-700 group-hover:opacity-30 group-hover:scale-110", v.matrix)}>
+            {matrixLines.map((line, i) => (
+              <div key={i} className="whitespace-nowrap animate-matrix-scroll" style={{ animationDelay: `${i * 0.5}s` }}>
+                {line}
+              </div>
+            ))}
+          </div>
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
-      style={{ perspective: "1000px" }}
-      whileHover={{ 
-        y: -10, 
-        rotateX: 4, 
-        rotateY: 4,
-        transition: { duration: 0.4 } 
-      }}
-      className={cn(
-        "relative flex flex-col w-full max-w-[380px] bg-[#0a0a0c] border rounded-sm overflow-hidden",
-        v.border,
-        "shadow-[0_0_30px_rgba(0,0,0,1)] group"
-      )}
-    >
-      {/* Moving Border Glow (The Rotating Outline) */}
-      <div className={cn(
-        "absolute -inset-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-sm overflow-hidden z-0",
-        "before:absolute before:inset-[-200%] before:bg-[conic-gradient(from_0deg,transparent_60%,var(--glow-color)_85%,transparent_100%)] before:animate-[spin_4s_linear_infinite]"
-      )} style={{ '--glow-color': v.glow } as React.CSSProperties} />
-
-      {/* Internal Background Depth Layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none z-0" />
-      
-      {/* Top Section: Scrolling Matrix/Code Effect */}
-      <div className="relative h-48 overflow-hidden bg-black border-b border-white/10 z-10">
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent z-10" />
-        
-        <div className={cn("absolute inset-0 font-mono text-[8px] leading-tight select-none opacity-[0.15] transition-all duration-700 group-hover:opacity-30 group-hover:scale-110", v.matrix)}>
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className="whitespace-nowrap animate-matrix-scroll" style={{ animationDelay: `${i * 0.5}s` }}>
-              {Math.random().toString(36).substring(2, 50).toUpperCase()} {Math.random().toString(36).substring(2, 50).toUpperCase()}
-            </div>
-          ))}
-        </div>
-        
         <div className={cn("absolute top-2 left-2 w-4 h-4 border-t border-l opacity-40 group-hover:opacity-100 transition-all", v.border)} />
         <div className={cn("absolute bottom-2 right-2 w-4 h-4 border-b border-r opacity-40 group-hover:opacity-100 transition-all", v.border)} />
 

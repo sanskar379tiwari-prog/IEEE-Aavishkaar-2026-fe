@@ -1,0 +1,154 @@
+
+> nextjs@0.1.0 lint
+> eslint
+
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/app/events/[slug]/page.tsx
+    7:10   warning  'RulesWin95Panel' is defined but never used                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   35:11   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  140:111  error    Comments inside children section of tag should be placed inside braces                                                                                                                                                                                                                   react/jsx-no-comment-textnodes
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/DitherBackground.tsx
+    1:1   warning  Unused eslint-disable directive (no problems were reported from 'react/no-unknown-property')
+   81:46  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-explicit-any
+   83:52  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-explicit-any
+  107:11  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/DitherBackground.tsx:107:11
+  105 |   const { colorNum, pixelSize } = props;
+  106 |   const WrappedRetroEffect = wrapEffect(RetroEffectImpl);
+> 107 |   return <WrappedRetroEffect ref={ref} colorNum={colorNum} pixelSize={pixelSize} />;
+      |           ^^^^^^^^^^^^^^^^^^ This component is created during render
+  108 | });
+  109 |
+  110 | RetroEffect.displayName = 'RetroEffect';
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/DitherBackground.tsx:106:30
+  104 | const RetroEffect = forwardRef<RetroEffectImpl, { colorNum: number; pixelSize: number }>((props, ref) => {
+  105 |   const { colorNum, pixelSize } = props;
+> 106 |   const WrappedRetroEffect = wrapEffect(RetroEffectImpl);
+      |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ The component is created during render here
+  107 |   return <WrappedRetroEffect ref={ref} colorNum={colorNum} pixelSize={pixelSize} />;
+  108 | });
+  109 |  react-hooks/static-components
+  113:32  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-explicit-any
+  213:21  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/DitherBackground.tsx:213:21
+  211 |           vertexShader={waveVertexShader}
+  212 |           fragmentShader={waveFragmentShader}
+> 213 |           uniforms={waveUniformsRef.current}
+      |                     ^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  214 |         />
+  215 |       </mesh>
+  216 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/refs
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/EventCard.tsx
+  96:16  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/EventCard.tsx:96:16
+  94 |           {[...Array(20)].map((_, i) => (
+  95 |             <div key={i} className="whitespace-nowrap animate-matrix-scroll" style={{ animationDelay: `${i * 0.5}s` }}>
+> 96 |               {Math.random().toString(36).substring(2, 50).toUpperCase()} {Math.random().toString(36).substring(2, 50).toUpperCase()}
+     |                ^^^^^^^^^^^^^ Cannot call impure function
+  97 |             </div>
+  98 |           ))}
+  99 |         </div>                                                              react-hooks/purity
+  96:76  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/EventCard.tsx:96:76
+  94 |           {[...Array(20)].map((_, i) => (
+  95 |             <div key={i} className="whitespace-nowrap animate-matrix-scroll" style={{ animationDelay: `${i * 0.5}s` }}>
+> 96 |               {Math.random().toString(36).substring(2, 50).toUpperCase()} {Math.random().toString(36).substring(2, 50).toUpperCase()}
+     |                                                                            ^^^^^^^^^^^^^ Cannot call impure function
+  97 |             </div>
+  98 |           ))}
+  99 |         </div>  react-hooks/purity
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/event-detail/RulesWin95Panel.tsx
+  127:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/event-detail/RulesWin95Panel.tsx:127:7
+  125 |     if (phase !== 'boot') return
+  126 |     if (bootIndex >= BOOT_LINES.length) {
+> 127 |       setPhase('typing')
+      |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  128 |       return
+  129 |     }
+  130 |     const t = setTimeout(() => setBootIndex((i) => i + 1), BOOT_LINE_SPEED)  react-hooks/set-state-in-effect
+  138:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/event-detail/RulesWin95Panel.tsx:138:7
+  136 |     if (phase !== 'typing') return
+  137 |     if (charIndex >= fullCode.length) {
+> 138 |       setPhase('done')
+      |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  139 |       return
+  140 |     }
+  141 |     const t = setTimeout(() => setCharIndex((i) => i + 1), CHAR_SPEED)         react-hooks/set-state-in-effect
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/layout/AppShell.tsx
+  11:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/layout/AppShell.tsx:11:5
+   9 |   
+  10 |   useEffect(() => {
+> 11 |     setT(new Date())
+     |     ^^^^ Avoid calling setState() directly within an effect
+  12 |     const id = setInterval(() => setT(new Date()), 1000)
+  13 |     return () => clearInterval(id)
+  14 |   }, [])  react-hooks/set-state-in-effect
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/ui/DecryptedText.tsx
+  179:5  error  'interval' is never reassigned. Use 'const' instead  prefer-const
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/ui/EventCard.tsx
+  21:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/ui/Shuffle.tsx
+  228:42  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  291:23  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  318:25  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  420:35  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+/Users/manjeetroy/Documents/college stuffs/IEEE-Aavishkaar-2026-fe/components/ui/Shuffle.tsx:420:35
+  418 |   const Tag = (tag || 'p') as keyof JSX.IntrinsicElements;
+  419 |
+> 420 |   return React.createElement(Tag, { ref: ref as any, className: classes, style: commonStyle }, text);
+      |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Passing a ref to a function may read its value during render
+  421 | };
+  422 |
+  423 | export default Shuffle;  react-hooks/refs
+  420:49  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+✖ 21 problems (17 errors, 4 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+

@@ -78,9 +78,9 @@ void mainImage(in vec4 inputColor, in vec2 uv, out vec4 outputColor) {
 `;
 
 class RetroEffectImpl extends Effect {
-  public uniforms: Map<string, THREE.Uniform<any>>;
+  public uniforms: Map<string, THREE.Uniform<number>>;
   constructor() {
-    const uniforms = new Map<string, THREE.Uniform<any>>([
+    const uniforms = new Map<string, THREE.Uniform<number>>([
       ['colorNum', new THREE.Uniform(4.0)],
       ['pixelSize', new THREE.Uniform(2.0)]
     ]);
@@ -101,16 +101,17 @@ class RetroEffectImpl extends Effect {
   }
 }
 
+const WrappedRetroEffect = wrapEffect(RetroEffectImpl);
+
 const RetroEffect = forwardRef<RetroEffectImpl, { colorNum: number; pixelSize: number }>((props, ref) => {
   const { colorNum, pixelSize } = props;
-  const WrappedRetroEffect = wrapEffect(RetroEffectImpl);
   return <WrappedRetroEffect ref={ref} colorNum={colorNum} pixelSize={pixelSize} />;
 });
 
 RetroEffect.displayName = 'RetroEffect';
 
 interface WaveUniforms {
-  [key: string]: THREE.Uniform<any>;
+  [key: string]: THREE.Uniform<number | THREE.Vector2 | THREE.Color>;
   time: THREE.Uniform<number>;
   resolution: THREE.Uniform<THREE.Vector2>;
   waveSpeed: THREE.Uniform<number>;
@@ -203,6 +204,9 @@ function DitheredWaves({
     mouseRef.current.set((e.clientX - rect.left) * dpr, (e.clientY - rect.top) * dpr);
   };
 
+  // eslint-disable-next-line react-hooks/refs
+  const uniforms = waveUniformsRef.current;
+
   return (
     <>
       <mesh ref={mesh} scale={[viewport.width, viewport.height, 1]}>
@@ -210,7 +214,7 @@ function DitheredWaves({
         <shaderMaterial
           vertexShader={waveVertexShader}
           fragmentShader={waveFragmentShader}
-          uniforms={waveUniformsRef.current}
+          uniforms={uniforms}
         />
       </mesh>
 

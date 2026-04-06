@@ -342,7 +342,7 @@ export function EventPdaSidebar({
         </button>
       ) : (
         <p className="text-center text-xs font-mono text-on-surface-variant relative z-10 py-2">
-          Registration {event.registrationStatus === 'FULL' ? 'full' : 'closed'}
+          {event.registrationStatus === 'FULL' ? 'Registration full' : 'Register'}
         </p>
       )}
     </div>

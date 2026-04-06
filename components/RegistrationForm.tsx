@@ -12,9 +12,12 @@ export default function RegistrationForm() {
   const [submittedData, setSubmittedData] = useState<RegistrationFormValues | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [maxMembers, setMaxMembers] = useState<number>(Infinity);
+  const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, '') ?? '';
 
   useEffect(() => {
-    fetch("/api/settings")
+    // If we have an external API, use it. Otherwise, use local /api (which user will delete).
+    const settingsUrl = `${apiBase}/api/settings`;
+    fetch(settingsUrl)
       .then((res) => res.json())
       .then((data) => {
         if (data.maxMembers) {
@@ -22,7 +25,7 @@ export default function RegistrationForm() {
         }
       })
       .catch((err) => console.error("Failed to fetch settings:", err));
-  }, []);
+  }, [apiBase]);
 
   const {
     register,
@@ -51,7 +54,8 @@ export default function RegistrationForm() {
     setErrorMsg("");
 
     try {
-      const response = await fetch("/api/register", {
+      const registerUrl = `${apiBase}/api/register`;
+      const response = await fetch(registerUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

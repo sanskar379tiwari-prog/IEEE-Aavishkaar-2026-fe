@@ -22,10 +22,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   const linkClass = (href: string) =>
-    `font-headline tracking-[0.1em] uppercase text-sm transition-colors ${
-      pathname === href
-        ? 'text-primary-container border-b-2 border-primary-container pb-1'
-        : 'text-slate-400 hover:text-primary-container'
+    `font-headline tracking-[0.1em] uppercase text-sm transition-colors ${pathname === href
+      ? 'text-primary-container border-b-2 border-primary-container pb-1'
+      : 'text-slate-400 hover:text-primary-container'
     }`
 
   return (

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { 
-  Geist, 
-  Geist_Mono, 
-  Press_Start_2P, 
-  Space_Mono, 
-  Share_Tech_Mono 
+import {
+  Geist,
+  Geist_Mono,
+  Press_Start_2P,
+  Space_Mono,
+  Share_Tech_Mono
 } from "next/font/google";
 import "./globals.css";
+import Footer from "./components/footer";
+import Navbar from "./components/navbar";
 
 // 1. Initialize all fonts
 const geistSans = Geist({
@@ -50,6 +52,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       /* 2. Combined all font variables and kept the 'dark' class from main */
       className={`
         ${geistSans.variable} 
@@ -60,8 +63,13 @@ export default function RootLayout({
         dark
       `}
     >
-      <body className="antialiased min-h-screen flex flex-col bg-bg-main text-white font-tech selection:bg-orange/30">
+      <body 
+        className="antialiased min-h-screen flex flex-col bg-bg-main text-white font-tech selection:bg-orange/30"
+        suppressHydrationWarning
+      >
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

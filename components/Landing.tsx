@@ -3,7 +3,6 @@
 import { lazy, Suspense, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Countdown from "@/components/Countdown"
-import AsciiCity from "@/components/AsciiCity"
 import FloatingElements from "@/components/FloatingElements"
 import { PremiumEventsSection } from "@/components/PremiumEventsSection"
 import Shuffle from "@/components/ui/Shuffle"
@@ -48,19 +47,19 @@ export function Landing() {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="flex flex-col items-center"
               >
-                <motion.p
+                {/* <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
                   className="font-pixel text-[10px] sm:text-xs tracking-[0.6em] text-primary/60 mb-8 uppercase"
                 >
                   INITIALIZING UPLINK_2026
-                </motion.p>
+                </motion.p> */}
 
                 <h1 className="leading-none uppercase tracking-tighter mb-4">
                   <Shuffle
                     text="RIT"
-                    className="font-pixel text-5xl sm:text-8xl md:text-9xl text-primary neon-text-strong"
+                    className="font-pixel text-5xl sm:text-8xl md:text-9xl text-primary elite-heading-letter font-bold tracking-[0.1em] px-1"
                     animationMode="random"
                     shuffleDirection="right"
                     shuffleTimes={3}
@@ -91,27 +90,27 @@ export function Landing() {
                   />
                 </motion.div>
 
-                <div className="w-32 h-[1px] bg-primary/30 mt-12 animate-pulse" />
+                {/* <div className="w-32 h-[1px] bg-primary/30 mt-12 animate-pulse" /> */}
               </motion.div>
             </div>
 
-            <div className="pointer-events-auto">
+            <div className="pointer-events-auto sm:px-10">
               <Countdown />
             </div>
 
           </div>
 
-          <AsciiCity />
+          {/* <AsciiCity /> */}
 
-          <div className="absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#05070d] via-[#05070d]/80 to-transparent z-20 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-full h-[150px] bg-[#05070d] z-10 pointer-events-none" />
+          {/* <div className="absolute bottom-0 left-0 w-full h-[400px] bg-gradient-to-t from-[#05070d] via-[#05070d]/80 to-transparent z-20 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none" /> */}
         </section>
 
         <div id="events-section" className="relative z-30">
           <PremiumEventsSection events={events} />
         </div>
 
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#05070d] to-transparent pointer-events-none" />
+        {/* <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#05070d] to-transparent pointer-events-none" /> */}
       </div>
     </div>
   )

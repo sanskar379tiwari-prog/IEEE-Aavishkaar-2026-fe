@@ -4,7 +4,6 @@ import { fetchEventBySlug } from "@/api/client"
 import { capacityPercent } from "@/mocks/events"
 import { EventDetailLiveBg } from "@/components/event-detail/EventDetailLiveBg"
 import { EventPdaSidebar } from "@/components/event-detail/EventPdaSidebar"
-import { RulesWin95Panel } from "@/components/event-detail/RulesWin95Panel"
 import { SectionHeader } from "@/components/ui/SectionHeader"
 
 interface EventDetailPageProps {
@@ -12,7 +11,7 @@ interface EventDetailPageProps {
 }
 
 export default async function EventDetailPage({ params }: EventDetailPageProps) {
-  const {slug} = await params
+  const { slug } = await params
   console.log(slug)
   const event = await fetchEventBySlug(slug)
   if (!event) {
@@ -31,10 +30,10 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
 
       <section className="relative z-10 min-h-[420px] w-full overflow-hidden flex items-end">
         <div className="absolute inset-0 z-0 overflow-hidden"
-             style={{ maskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)' }}>
+          style={{ maskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)' }}>
           <img src={hero} alt="" className="w-full h-full object-cover opacity-60" />
           <div className="absolute bottom-0 left-0 right-0 h-64 bg-background/40 backdrop-blur-3xl z-10"
-               style={{ maskImage: 'linear-gradient(to top, black 20%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 20%, transparent 100%)' }} />
+            style={{ maskImage: 'linear-gradient(to top, black 20%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 20%, transparent 100%)' }} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-20" />
           <div className="absolute inset-0 mix-blend-overlay bg-primary-container/5 pointer-events-none" />
           <div className="absolute inset-0 scanline opacity-20 pointer-events-none" />
@@ -138,7 +137,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
         <aside className="lg:col-span-3">
           <EventPdaSidebar event={event} canRegister={canRegister} />
           <p className="text-center text-[10px] font-mono text-on-surface/35 uppercase tracking-tighter mt-3">
-            // secure_channel //
+            {"// secure_channel //"}
           </p>
         </aside>
       </main>

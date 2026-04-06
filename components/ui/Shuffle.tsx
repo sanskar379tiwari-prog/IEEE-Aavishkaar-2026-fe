@@ -117,7 +117,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
         }
         try {
           splitRef.current?.revert();
-        } catch {}
+        } catch { }
         splitRef.current = null;
         playingRef.current = false;
       };
@@ -148,14 +148,16 @@ const Shuffle: React.FC<ShuffleProps> = ({
 
           const w = ch.getBoundingClientRect().width;
           const h = ch.getBoundingClientRect().height;
+          const isVertical = shuffleDirection === 'up' || shuffleDirection === 'down';
           if (!w) return;
 
           const wrap = document.createElement('span');
-          wrap.className = 'inline-block overflow-hidden text-left py-1';
+          wrap.className = 'inline-block overflow-hidden text-left py-2 px-[0.05em]';
           Object.assign(wrap.style, {
-            width: w + 'px',
-            height: shuffleDirection === 'up' || shuffleDirection === 'down' ? h + 'px' : 'auto',
-            verticalAlign: 'bottom'
+            width: (w + 2) + 'px',
+            height: isVertical ? (h + 8) + 'px' : 'auto',
+            verticalAlign: 'middle',
+            marginTop: '-4px'
           });
 
           const inner = document.createElement('span');
@@ -208,11 +210,11 @@ const Shuffle: React.FC<ShuffleProps> = ({
             startX = 0;
             finalX = -steps * w;
           } else if (shuffleDirection === 'down') {
-            startY = -steps * h;
+            startY = -steps * (h + 2); // Small vertical offset for pixel font consistency
             finalY = 0;
           } else if (shuffleDirection === 'up') {
             startY = 0;
-            finalY = -steps * h;
+            finalY = -steps * (h + 2);
           }
 
           if (shuffleDirection === 'left' || shuffleDirection === 'right') {
@@ -225,6 +227,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
             inner.setAttribute('data-final-y', String(finalY));
           }
 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           if (colorFrom) (inner.style as any).color = colorFrom;
           wrappersRef.current.push(wrap);
         });
@@ -288,6 +291,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
         });
 
         const addTween = (targets: HTMLElement[], at: number) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const vars: any = {
             duration,
             ease,
@@ -315,6 +319,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
         } else {
           strips.forEach(strip => {
             const d = Math.random() * maxDelay;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const vars: any = {
               duration,
               ease,
@@ -394,7 +399,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
     }
   );
 
-  const baseTw = 'inline-block whitespace-normal break-words will-change-transform uppercase text-2xl leading-none font-pixel';
+  const baseTw = 'inline-block whitespace-normal break-words will-change-transform uppercase text-2xl leading-normal font-pixel';
   const userHasFont = useMemo(() => className && /font[-[]/i.test(className), [className]);
 
   const fallbackFont = useMemo(
@@ -417,6 +422,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
   );
   const Tag = (tag || 'p') as keyof JSX.IntrinsicElements;
 
+  // eslint-disable-next-line react-hooks/refs, @typescript-eslint/no-explicit-any
   return React.createElement(Tag, { ref: ref as any, className: classes, style: commonStyle }, text);
 };
 
