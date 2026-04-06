@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* --- Core Material 3 Palette (from temp) --- */
+  /* --- Core Material 3 Palette --- */
   --color-background: #0d112a;
   --color-surface: #0d112a;
+  --color-surface-container-lowest: #0a0d22;
   --color-surface-container-low: #161a33;
   --color-surface-container: #1a1e37;
   --color-surface-container-high: #242842;
   --color-surface-container-highest: #2f334e;
   --color-on-surface: #dee0ff;
+  --color-on-surface-variant: #9194b3;
 
   --color-primary: #ffb59d;
   --color-primary-container: #ff6b35;
@@ -20,6 +22,12 @@
   --color-tertiary: #f9abff;
   --color-error: #ffb4ab;
   --color-outline: #a98a80;
+  --color-outline-variant: #494d6b;
+
+  /* --- Semantic Aliases --- */
+  --color-muted-foreground: #7e829e;
+  --color-card: #1a1e37;
+  --color-text-dim: #6b7194;
 
   /* --- Main Branch Additions --- */
   --color-bg-main: #0c0f1a;
@@ -36,12 +44,16 @@
   --font-retro: "Audiowide", "Share Tech Mono", ui-monospace, monospace;
   --font-tech: var(--font-share-tech), monospace;
   --font-pixel: var(--font-press-start-2p), "Share Tech Mono", monospace;
+  --font-space: var(--font-space-mono), "Space Mono", ui-monospace, monospace;
+  --font-label: var(--font-share-tech), "Share Tech Mono", ui-monospace, monospace;
 
   /* --- Complex Animations --- */
   --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
   --animate-scan-horizontal: scan-horizontal 3s linear infinite;
   --animate-catalog-marquee: catalog-marquee 32s linear infinite;
   --animate-letter-glow: glow-sequence 4s infinite ease-in-out;
+  --animate-matrix-scroll: matrix-scroll 8s linear infinite;
+  --animate-scan-vertical: scan-vertical 2s ease-in-out infinite;
 }
 
 @layer utilities {
@@ -91,6 +103,30 @@
 
     100% {
       transform: translateX(-50%);
+    }
+  }
+
+  @keyframes matrix-scroll {
+    0% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes scan-vertical {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    50% {
+      transform: translateY(100%);
+    }
+
+    100% {
+      transform: translateY(-100%);
     }
   }
 
