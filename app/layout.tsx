@@ -15,21 +15,21 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aavishkaar 2026",
+  title: "IEEE Techfest 2026",
   description: "Official TechFest Registration System",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html
       lang="en"
       className={`${shareTech.variable} ${spaceMono.variable} dark`}
     >
-      <body className="antialiased bg-bg-main text-white font-tech selection:bg-orange/30">
+      <body className="antialiased min-h-screen flex flex-col bg-bg-main text-white font-tech selection:bg-orange/30">
         {children}
       </body>
     </html>
