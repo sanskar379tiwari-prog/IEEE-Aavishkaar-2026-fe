@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Share_Tech_Mono, Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const shareTech = Share_Tech_Mono({
+  weight: "400",
+  variable: "--font-share-tech",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  variable: "--font-space-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Techfest",
-  description: "Techfest Website",
+  title: "IEEE Techfest 2026",
+  description: "Official TechFest Registration System",
 };
 
 export default function RootLayout({
@@ -25,9 +27,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${shareTech.variable} ${spaceMono.variable} dark`}
     >
-      <body className="min-h-screen flex flex-col bg-[#050a14] text-white">
+      <body className="antialiased min-h-screen flex flex-col bg-bg-main text-white font-tech selection:bg-orange/30">
         {children}
       </body>
     </html>
