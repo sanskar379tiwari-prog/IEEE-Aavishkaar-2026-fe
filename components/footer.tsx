@@ -24,13 +24,13 @@ const LinkedInIcon = () => (
 );
 
 const WebsiteIcon = () => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className="w-5 h-5"
   >
     <circle cx="12" cy="12" r="10" />
@@ -229,7 +229,7 @@ export default function Footer() {
                       key={s.name}
                       href={s.link}
                       target="_blank" // Opens in a new tab
-                      rel="noopener noreferrer" 
+                      rel="noopener noreferrer"
                       onClick={() =>
                         setActiveSocial(activeSocial === s.name ? "" : s.name)
                       }
